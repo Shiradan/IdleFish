@@ -30,13 +30,13 @@ func _physics_process(delta):
 	move(delta)
 	
 func move(delta: float) -> void:
-	"Start Move"
 	#var accel := ACCELERATION * direction
 	#velocity = accel * delta
 	#velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 	#velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
 	velocity=velocity.move_toward(direction*MAX_SPEED,ACCELERATION*delta)
-	sprite.flip_h=velocity.x<0
+	if direction!=Vector2.ZERO:
+		sprite.flip_h=velocity.x<0	
 	move_and_slide()
 
 func spawn_character() -> void:

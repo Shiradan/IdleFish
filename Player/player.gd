@@ -17,7 +17,8 @@ func _ready():
 func _physics_process(_delta):
 	direction = _get_direction()
 	velocity=velocity.move_toward(direction*MAX_SPEED,ACCELERATION*_delta)
-	sprite.flip_h=velocity.x<0	
+	if direction!=Vector2.ZERO:
+		sprite.flip_h=velocity.x<0	
 	move_and_slide()
 	
 func setup(u: String, pos: Vector2) -> void:
