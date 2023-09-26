@@ -40,7 +40,7 @@ signal state_updated(positions, inputs)
 # spawn.
 signal character_spawned(id, name)
 
-var _client=Nakama.create_client(SERVER_KEY,REMOTE_NAKAMA_SERVER_IP,DEFAULT_PORT,DEFAULT_PROTOCOL,10)
+var _client=Nakama.create_client(SERVER_KEY,REMOTE_NAKAMA_SERVER_IP,DEFAULT_PORT,DEFAULT_PROTOCOL,10,NakamaLogger.LOG_LEVEL.ERROR)
 var _session:NakamaSession
 var _socket:NakamaSocket
 var _worldId=""
