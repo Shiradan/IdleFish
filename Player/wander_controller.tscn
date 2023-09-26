@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d275xhw2uid85"]
+
+[ext_resource type="Script" path="res://Player/wander_controller.gd" id="1_x3ksi"]
+
+[node name="WanderController" type="Node2D"]
+script = ExtResource("1_x3ksi")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

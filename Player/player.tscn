@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://briv81to3vbt1"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_bkno0"]
+[ext_resource type="Texture2D" uid="uid://3jy08ufwkjk7" path="res://Player/peixinhos1.png" id="1_isrq8"]
+[ext_resource type="Script" path="res://Player/Camera2D.gd" id="4_frhu4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bw3jk"]
+radius = 24.0
+height = 74.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_bkno0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-102, -87)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_isrq8")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bw3jk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("4_frhu4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+modulate = Color(0, 0, 0.545098, 1)
+offset_left = -32.0
+offset_top = -56.0
+offset_right = 25.0
+offset_bottom = -30.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "User ID"

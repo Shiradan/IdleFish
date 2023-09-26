@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbg8trxgobnb7"]
+
+[ext_resource type="Texture2D" uid="uid://dwoibntvfhei7" path="res://backgound_and_tiles/BG3.png" id="1_nwcs1"]
+[ext_resource type="Script" path="res://fish_tank.gd" id="1_ognu3"]
+[ext_resource type="PackedScene" uid="uid://briv81to3vbt1" path="res://Player/player.tscn" id="3_gl6a0"]
+[ext_resource type="PackedScene" uid="uid://hupuds6ywk0v" path="res://Player/character.tscn" id="3_pw4st"]
+
+[node name="FishTank" type="Node2D"]
+script = ExtResource("1_ognu3")
+PlayerScene = ExtResource("3_gl6a0")
+CharacterScene = ExtResource("3_pw4st")
+
+[node name="Background" type="Sprite2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+offset_left = -320.0
+offset_top = -248.0
+offset_right = 960.0
+offset_bottom = 632.0
+texture = ExtResource("1_nwcs1")
+
+[node name="Tank" type="StaticBody2D" parent="Background/TextureRect"]
+collision_mask = 0
+
+[node name="Boudary" type="CollisionPolygon2D" parent="Background/TextureRect/Tank"]
+build_mode = 1
+polygon = PackedVector2Array(1192, 160, 1192, 688, 88, 688, 88, 160)
+
+[node name="Player" parent="." instance=ExtResource("3_gl6a0")]
+
+[node name="Water" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="TopLeft" type="Marker2D" parent="."]
+visible = false
+position = Vector2(-256, -128)
+
+[node name="BottomRight" type="Marker2D" parent="."]
+visible = false
+position = Vector2(896, 552)
