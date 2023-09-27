@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqdl3wo5umpyl"]
+
+[ext_resource type="Script" path="res://UI/ToggleChatButton.gd" id="1_50o1c"]
+[ext_resource type="Texture2D" uid="uid://cuvv4tcr5hykq" path="res://assets/theme/icons/chevron-up.svg" id="1_lsnpq"]
+[ext_resource type="Script" path="res://UI/game_ui.gd" id="1_msyx3"]
+[ext_resource type="PackedScene" uid="uid://d0yvl1v7qhgxk" path="res://UI/chat_box.tscn" id="2_a617c"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_msyx3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 208.0
+offset_right = 346.0
+offset_bottom = 360.0
+
+[node name="ToggleChatButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+toggle_mode = true
+text = "Chat"
+icon = ExtResource("1_lsnpq")
+script = ExtResource("1_50o1c")
+
+[node name="ChatBox" parent="HBoxContainer" instance=ExtResource("2_a617c")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="toggled" from="HBoxContainer/ToggleChatButton" to="HBoxContainer/ToggleChatButton" method="_on_toggled"]
+[connection signal="toggled" from="HBoxContainer/ToggleChatButton" to="HBoxContainer/ChatBox" method="_on_toggle_chat_button_toggled"]
+[connection signal="edit_ended" from="HBoxContainer/ChatBox" to="." method="_on_chat_box_edit_ended"]
+[connection signal="edit_started" from="HBoxContainer/ChatBox" to="." method="_on_chat_box_edit_started"]
+[connection signal="text_sent" from="HBoxContainer/ChatBox" to="." method="_on_chat_box_text_sent"]

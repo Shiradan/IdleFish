@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0yvl1v7qhgxk"]
+
+[ext_resource type="Script" path="res://UI/LineEdit.gd" id="1_kqo12"]
+[ext_resource type="Script" path="res://UI/chat_box.gd" id="1_ljnly"]
+
+[node name="ChatBox" type="Panel"]
+offset_right = 272.0
+offset_bottom = 152.0
+script = ExtResource("1_ljnly")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 272.0
+offset_bottom = 120.0
+
+[node name="ChatLog" type="RichTextLabel" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#ff9b00]Player1[/color]: This is [b]some[/b] placeholder text
+[color=#1e95e4]Player2[/color]: With another player"
+scroll_following = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 272.0
+offset_bottom = 151.0
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_kqo12")
+
+[node name="SendButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "SEND"
+
+[connection signal="focus_entered" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_focus_entered"]
+[connection signal="focus_exited" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/SendButton" to="." method="_on_send_button_pressed"]

@@ -35,7 +35,7 @@ func spawn() -> void:
 
 func set_is_active(value: bool) -> void:
 	is_active = value
-	set_process(value)
+	set_physics_process(value)
 	set_process_unhandled_input(value)
 	timer.paused = not value
 
@@ -52,3 +52,11 @@ func _get_direction() -> Vector2:
 
 func _on_Timer_timeout() -> void:
 	ServerConnection.send_position_update(global_position)
+
+
+func _on_game_ui_chat_edit_ended():
+	self.is_active = true
+
+
+func _on_game_ui_chat_edit_started():
+	self.is_active = false

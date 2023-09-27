@@ -7,6 +7,7 @@ var characters = {}
 
 @onready var world = $Water
 @onready var player: Node = $Player
+@onready var game_ui := $CanvasLayer/GameUI
 
 func _ready() -> void:
 	#warning-ignore: return_value_discarded
@@ -40,6 +41,10 @@ func join_world(
 	ServerConnection.connect("state_updated", _on_ServerConnection_state_updated)
 	#warning-ignore: return_value_discarded
 	ServerConnection.connect("character_spawned", _on_ServerConnection_character_spawned)
+	#warning-ignore: return_value_discarded
+	ServerConnection.connect(
+		"chat_message_received", _on_ServerConnection_chat_message_received
+	)
 
 
 func create_character(
@@ -107,3 +112,19 @@ func _on_ServerConnection_character_spawned(id: String, n: String) -> void:
 		characters[id].username = n
 		characters[id].spawn_character()
 		characters[id].do_show()
+
+func _on_ServerConnection_chat_message_received(sender_id: String, message: String) -> void:
+	var color := Color.GRAY
+	var sender_name := "User"
+
+	if sender_id in characters:
+		color = Color.SADDLE_BROWN
+		sender_name = characters[sender_id].username
+	elif sender_id == ServerConnection.get_user_id():
+		color = Color.DARK_BLUE
+		sender_name = player.username
+
+	game_ui.add_chat_reply(message, sender_name, color)
+
+func _on_game_ui_text_sent(text):
+	ServerConnection.send_text_async(text)

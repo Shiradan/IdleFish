@@ -40,6 +40,9 @@ signal state_updated(positions, inputs)
 # spawn.
 signal character_spawned(id, name)
 
+# Emitted when the server has received a new chat message into the world channel
+signal chat_message_received(sender_id, message)
+
 var _client=Nakama.create_client(SERVER_KEY,REMOTE_NAKAMA_SERVER_IP,DEFAULT_PORT,DEFAULT_PROTOCOL,10,NakamaLogger.LOG_LEVEL.ERROR)
 var _session:NakamaSession
 var _socket:NakamaSocket
@@ -47,6 +50,7 @@ var _worldId=""
 var _presences={}: set=_no_set
 var error_message := "": set= _no_set, get= _get_error_message
 var _exception_handler := ExceptionHandler.new()
+var _channelId: String
 
 func authenticate_async(email, password):
 	var result=OK
@@ -54,6 +58,7 @@ func authenticate_async(email, password):
 	if not new_session.is_exception():
 		_session=new_session
 	else:
+		@warning_ignore("int_as_enum_without_cast")
 		result=new_session.get_exception().status_code
 		print(new_session.get_exception()._to_string())
 	return result
@@ -74,6 +79,8 @@ func connect_to_server_async():
 		_socket.connect("received_match_presence", _on_NakamaSocket_received_match_presence)
 		#warning-ignore: return_value_discarded
 		_socket.connect("received_match_state", _on_NakamaSocket_received_match_state)
+		#warning-ignore: return_value_discarded
+		_socket.connect("received_channel_message", _on_NamakaSocket_received_channel_message)
 
 		return OK
 	return ERR_CANT_CONNECT
@@ -91,6 +98,17 @@ func join_world_async():
 	
 	for presence in matchJoinResult.presences:
 		_presences[presence.user_id]=presence
+	
+	var roomname = "World"
+	var persistence = true
+	var hidden = false
+	var type = NakamaSocket.ChannelType.Room
+	var channel : NakamaRTAPI.Channel = await _socket.join_chat_async(roomname, type, persistence, hidden)
+	if channel.is_exception():
+		print("An error occurred: %s" % channel)
+		return
+	_channelId=channel.id
+	print("Now connected to channel id: '%s'" % _channelId)
 	
 	return _presences
 
@@ -164,6 +182,22 @@ func send_spawn(n: String) -> void:
 		var payload := {id = get_user_id(), nm = n}
 		_socket.send_match_state_async(_worldId, OpCodes.DO_SPAWN, JSON.stringify(payload))
 
+func send_text_async(text: String) -> int:
+	if not _socket:
+		return ERR_UNAVAILABLE
+
+	var data := {"msg": text}
+
+	var message_response: NakamaRTAPI.ChannelMessageAck = await _socket.write_chat_message_async(_channelId, data)
+
+	var parsed_result := _exception_handler.parse_exception(message_response)
+	if parsed_result != OK:
+		emit_signal(
+			"chat_message_received", "SYSTEM", "Error code %s: %s" % [parsed_result, error_message]
+		)
+
+	return parsed_result
+
 # Called when the socket was connected.
 func _on_NakamaSocket_connected() -> void:
 	return
@@ -225,6 +259,12 @@ func _on_NakamaSocket_received_match_state(match_state: NakamaRTAPI.MatchData) -
 
 			emit_signal("character_spawned", id, n)
 
+# Called when the server received a new chat message.
+func _on_NamakaSocket_received_channel_message(message: NakamaAPI.ApiChannelMessage) -> void:
+	if message.code != 0:
+		return
+	var content: Dictionary = JSON.parse_string(message.content)
+	emit_signal("chat_message_received", message.sender_id, content.msg)
 
 
 func _no_set(_value) -> void:
