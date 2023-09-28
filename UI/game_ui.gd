@@ -6,6 +6,7 @@ signal chat_edit_ended
 
 @onready var chat_box := $HBoxContainer/ChatBox
 @onready var toggle_chat_button := $HBoxContainer/ToggleChatButton
+@onready var chat_bubble_icon := $ChatBubbleIcon
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -23,6 +24,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func add_chat_reply(text: String, sender: String, text_color: Color) -> void:
 	chat_box.add_reply(text, sender, text_color)
 
+func show_bubble():
+	if not chat_box.visible:
+		chat_bubble_icon.visible=true
+	
+func hide_bubble():
+	chat_bubble_icon.visible=false
+
+
 func _on_chat_box_text_sent(text):
 	emit_signal("text_sent", text)
 
@@ -33,3 +42,6 @@ func _on_chat_box_edit_ended():
 
 func _on_chat_box_edit_started():
 	emit_signal("chat_edit_started")
+
+func _on_toggle_chat_button_toggled(button_pressed):
+	hide_bubble()

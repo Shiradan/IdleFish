@@ -22,11 +22,11 @@ func _ready() -> void:
 # Add a new reply to the chat box, taking `HISTORY_LENGTH` into account.
 func add_reply(text: String, sender_name: String, color: Color) -> void:
 	if reply_count == HISTORY_LENGTH:
-		chat_log.text = chat_log.text.substr(chat_log.text.find("\n"))
+		chat_log.remove_paragraph(0)
 	else:
 		reply_count += 1
 	chat_log.append_text(
-		"\n[color=#%s]%s[/color]: %s"
+		"[color=#%s]%s[/color]: %s\n"
 		% [color.to_html(false), sender_name, text]
 	)
 

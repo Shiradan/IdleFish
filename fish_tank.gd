@@ -123,7 +123,7 @@ func _on_ServerConnection_chat_message_received(sender_id: String, message: Stri
 	elif sender_id == ServerConnection.get_user_id():
 		color = Color.DARK_BLUE
 		sender_name = player.username
-
+	game_ui.show_bubble()
 	game_ui.add_chat_reply(message, sender_name, color)
 
 func _on_game_ui_text_sent(text):
