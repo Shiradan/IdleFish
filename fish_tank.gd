@@ -90,6 +90,7 @@ func _on_ServerConnection_presences_changed() -> void:
 
 	for key in to_delete:
 		characters[key].despawn()
+		game_ui.add_notification(characters[key].username, Color.CHOCOLATE, true)
 		characters.erase(key)
 
 func _on_ServerConnection_state_updated(positions: Dictionary, inputs: Dictionary) -> void:
@@ -112,6 +113,7 @@ func _on_ServerConnection_character_spawned(id: String, n: String) -> void:
 		characters[id].username = n
 		characters[id].spawn_character()
 		characters[id].do_show()
+		game_ui.add_notification(characters[id].username, Color.CHOCOLATE)
 
 func _on_ServerConnection_chat_message_received(sender_id: String, message: String) -> void:
 	var color := Color.GRAY

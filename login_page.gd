@@ -63,5 +63,5 @@ func _on_join_tank_button_down():
 		get_tree().change_scene_to_file("res://fish_tank.tscn")
 		ServerConnection.send_spawn(fishName)
 	
-func _on_password_text_submitted(new_text):
+func _on_password_text_submitted(_new_text):
 	register_and_login()

@@ -53,7 +53,7 @@ func despawn() -> void:
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.play()
-	queue_free()
+	tween.tween_callback(self.queue_free)
 
 func update_state() -> void:
 	var tween:Tween = get_tree().create_tween()

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqdplvtgky4nr"]
+
+[ext_resource type="Script" path="res://UI/notification.gd" id="1_javkh"]
+
+[node name="Notification" type="Panel"]
+offset_right = 176.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_javkh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 8.0
+offset_right = 168.0
+offset_bottom = 32.0
+bbcode_enabled = true
+scroll_active = false

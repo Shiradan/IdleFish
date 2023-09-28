@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4r62oj6nxo28"]
+
+[ext_resource type="Script" path="res://UI/notificationList.gd" id="1_1lagd"]
+
+[node name="NotificationList" type="VBoxContainer"]
+offset_left = 448.0
+offset_top = 312.0
+offset_right = 624.0
+offset_bottom = 344.0
+alignment = 2
+script = ExtResource("1_1lagd")

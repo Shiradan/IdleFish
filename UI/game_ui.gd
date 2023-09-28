@@ -7,6 +7,7 @@ signal chat_edit_ended
 @onready var chat_box := $HBoxContainer/ChatBox
 @onready var toggle_chat_button := $HBoxContainer/ToggleChatButton
 @onready var chat_bubble_icon := $ChatBubbleIcon
+@onready var notifications_ui := $NotificationsUI
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -30,6 +31,9 @@ func show_bubble():
 	
 func hide_bubble():
 	chat_bubble_icon.visible=false
+
+func add_notification(username: String, text_color: Color, disconnected := false) -> void:
+	notifications_ui.add_notification(username, text_color, disconnected)
 
 
 func _on_chat_box_text_sent(text):
