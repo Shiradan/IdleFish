@@ -43,5 +43,5 @@ func _on_chat_box_edit_ended():
 func _on_chat_box_edit_started():
 	emit_signal("chat_edit_started")
 
-func _on_toggle_chat_button_toggled(button_pressed):
+func _on_toggle_chat_button_toggled(_button_pressed):
 	hide_bubble()

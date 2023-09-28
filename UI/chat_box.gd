@@ -43,7 +43,7 @@ func _on_send_button_pressed():
 	send_chat_message()
 
 
-func _on_line_edit_text_submitted(new_text):
+func _on_line_edit_text_submitted(_new_text):
 	send_chat_message()
 	
 func _on_line_edit_focus_entered():

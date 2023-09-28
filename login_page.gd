@@ -1,18 +1,19 @@
 extends Control
 
-	
+@onready var status_panel=$LoginPanel/StatusPanel
 
-func _on_join_idle_button_down():
+func register_and_login():
 	var email=$LoginPanel/UsernameContainer/Username.text
 	var password=$LoginPanel/PasswordContainer/Password.text
 	
-	print("Authenticating user %s." % email)
+	status_panel.text="认证用户: %s." % email
 	var result=await ServerConnection.authenticate_async(email,password)
 	
 	if result==OK:
-		print("Authenticated user %s successfully." % email)
+		status_panel.text="成功认证用户 %s." % email
 	else:
-		print("Failed to authenticate user %s." % email)
+		status_panel.text="认证用户 %s 失败, 请检查邮箱格式并使用八位数以上密码登录." % email
+		return
 		
 	await connect_to_server()
 	await join_world()
@@ -23,9 +24,10 @@ func _on_join_idle_button_down():
 func connect_to_server():
 	var result=await ServerConnection.connect_to_server_async()
 	if result==OK:
-		print("Connected to Nakama Server.")
+		status_panel.text="连接到Nakama服务器."
 	elif ERR_CANT_CONNECT:
-		print("Failed to connect to Nakama Server.")
+		status_panel.text="连接Nakama服务器失败，请检查网络情况或联系站长."
+		return
 
 func join_world():
 	var presences=await ServerConnection.join_world_async()
@@ -46,6 +48,10 @@ func create_fish_and_join_game():
 		var fishCreatePanel=$FishCreatePanel
 		fishCreatePanel.show()
 
+
+func _on_join_idle_button_down():
+	register_and_login()
+
 func _on_join_tank_button_down():
 	var fishName=$FishCreatePanel/FishContainer/FishName.text
 	if fishName!="":
@@ -57,3 +63,5 @@ func _on_join_tank_button_down():
 		get_tree().change_scene_to_file("res://fish_tank.tscn")
 		ServerConnection.send_spawn(fishName)
 	
+func _on_password_text_submitted(new_text):
+	register_and_login()

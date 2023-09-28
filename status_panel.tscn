@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6y0f1si6ab4p"]
+
+[ext_resource type="Script" path="res://status_panel.gd" id="1_1avsc"]
+
+[node name="StatusPanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 333.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+script = ExtResource("1_1avsc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+vertical_alignment = 1

@@ -25,7 +25,7 @@ offset_bottom = 360.0
 layout_mode = 2
 size_flags_vertical = 8
 toggle_mode = true
-text = "Chat"
+text = "聊天"
 icon = ExtResource("1_lsnpq")
 script = ExtResource("1_50o1c")
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcrk6phe4reec"]
+[gd_scene load_steps=4 format=3 uid="uid://dcrk6phe4reec"]
 
 [ext_resource type="Texture2D" uid="uid://fk5tkhu74lpd" path="res://backgound_and_tiles/BG1.png" id="1_k2sip"]
 [ext_resource type="Script" path="res://login_page.gd" id="1_n5js8"]
+[ext_resource type="PackedScene" uid="uid://b6y0f1si6ab4p" path="res://status_panel.tscn" id="3_bwqoy"]
 
 [node name="LoginPage" type="Control"]
 layout_mode = 3
@@ -46,7 +47,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-placeholder_text = "Email Address"
+placeholder_text = "请输入正确的邮箱地址"
 
 [node name="PasswordContainer" type="HBoxContainer" parent="LoginPanel"]
 layout_mode = 2
@@ -64,15 +65,22 @@ vertical_alignment = 1
 [node name="Password" type="LineEdit" parent="LoginPanel/PasswordContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Password"
+placeholder_text = "请输入至少8位数密码"
 
 [node name="JoinIdle" type="Button" parent="LoginPanel"]
 layout_mode = 2
 offset_left = 176.0
-offset_top = 150.0
+offset_top = 192.0
 offset_right = 336.0
-offset_bottom = 185.0
-text = "Be A Fish"
+offset_bottom = 227.0
+text = "成为闲鱼"
+
+[node name="StatusPanel" parent="LoginPanel" instance=ExtResource("3_bwqoy")]
+layout_mode = 1
+offset_left = 128.0
+offset_top = 144.0
+offset_right = -128.0
+offset_bottom = -83.0
 
 [node name="FishCreatePanel" type="Panel" parent="."]
 visible = false
@@ -92,7 +100,7 @@ offset_bottom = 136.0
 [node name="FishName" type="LineEdit" parent="FishCreatePanel/FishContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Enter Your Fish Name"
+placeholder_text = "给鱼起个名字"
 alignment = 1
 
 [node name="JoinTank" type="Button" parent="FishCreatePanel"]
@@ -101,7 +109,8 @@ offset_left = 192.0
 offset_top = 160.0
 offset_right = 320.0
 offset_bottom = 200.0
-text = "Jump Into Tank"
+text = "跳进鱼缸"
 
+[connection signal="text_submitted" from="LoginPanel/PasswordContainer/Password" to="." method="_on_password_text_submitted"]
 [connection signal="button_down" from="LoginPanel/JoinIdle" to="." method="_on_join_idle_button_down"]
 [connection signal="button_down" from="FishCreatePanel/JoinTank" to="." method="_on_join_tank_button_down"]
