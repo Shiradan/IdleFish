@@ -1,36 +1,91 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbg8trxgobnb7"]
+[gd_scene load_steps=18 format=3 uid="uid://dbg8trxgobnb7"]
 
-[ext_resource type="Texture2D" uid="uid://dwoibntvfhei7" path="res://backgound_and_tiles/BG3.png" id="1_nwcs1"]
 [ext_resource type="Script" path="res://fish_tank.gd" id="1_ognu3"]
 [ext_resource type="PackedScene" uid="uid://briv81to3vbt1" path="res://Player/player.tscn" id="3_gl6a0"]
 [ext_resource type="PackedScene" uid="uid://hupuds6ywk0v" path="res://Player/character.tscn" id="3_pw4st"]
+[ext_resource type="PackedScene" uid="uid://blfdsu6j3orsw" path="res://water_tank.tscn" id="4_52pb8"]
 [ext_resource type="PackedScene" uid="uid://dqdl3wo5umpyl" path="res://UI/game_ui.tscn" id="5_t1b3e"]
+[ext_resource type="Texture2D" uid="uid://boeuvt4f2ynnl" path="res://plants/plant_2o.png" id="6_bo5an"]
+[ext_resource type="Texture2D" uid="uid://dqt2s7gfmpi2q" path="res://plants/plant_1_o.png" id="6_gk7fa"]
+[ext_resource type="PackedScene" uid="uid://bw0f4icdpppg2" path="res://plants/plant_15o.tscn" id="6_xoq28"]
+[ext_resource type="PackedScene" uid="uid://dg5bfoxrkum5g" path="res://plants/plant_9o.tscn" id="7_1vy22"]
+[ext_resource type="PackedScene" uid="uid://qswf1tcaot1n" path="res://plants/plant_5o.tscn" id="8_7kfhq"]
+[ext_resource type="PackedScene" uid="uid://6vpqn7gh75w4" path="res://plants/plant_10o.tscn" id="8_xmmsw"]
+[ext_resource type="PackedScene" uid="uid://chjfro8c84a4r" path="res://plants/plant_11o.tscn" id="9_jiet0"]
+[ext_resource type="PackedScene" uid="uid://4n6mx3vtdi7v" path="res://plants/plant_13o.tscn" id="11_ee4k6"]
+[ext_resource type="Texture2D" uid="uid://clghy4xv7mxg5" path="res://plants/plant_long_1o.png" id="11_phkp7"]
+[ext_resource type="Texture2D" uid="uid://cjhsgn75kg6qf" path="res://plants/plant_long_4o.png" id="12_gn4ak"]
+[ext_resource type="PackedScene" uid="uid://dq0nmhwe34ars" path="res://plants/shell_1o.tscn" id="13_4go6d"]
+[ext_resource type="PackedScene" uid="uid://gg22futrj6b4" path="res://plants/sponge_1o.tscn" id="14_1ryck"]
 
 [node name="FishTank" type="Node2D"]
 script = ExtResource("1_ognu3")
 PlayerScene = ExtResource("3_gl6a0")
 CharacterScene = ExtResource("3_pw4st")
 
-[node name="Background" type="Sprite2D" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="Background"]
-offset_left = -320.0
-offset_top = -248.0
-offset_right = 960.0
-offset_bottom = 632.0
-texture = ExtResource("1_nwcs1")
-
-[node name="Tank" type="StaticBody2D" parent="Background/TextureRect"]
-collision_mask = 0
-
-[node name="Boudary" type="CollisionPolygon2D" parent="Background/TextureRect/Tank"]
-build_mode = 1
-polygon = PackedVector2Array(1192, 160, 1192, 688, 88, 688, 88, 160)
-
-[node name="Player" parent="." instance=ExtResource("3_gl6a0")]
+[node name="WaterTank" parent="." instance=ExtResource("4_52pb8")]
 
 [node name="Water" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Player" parent="Water" instance=ExtResource("3_gl6a0")]
+
+[node name="Plant" type="Node2D" parent="Water"]
+y_sort_enabled = true
+
+[node name="Plant1O" type="Sprite2D" parent="Water/Plant"]
+texture_filter = 1
+position = Vector2(56, 392)
+scale = Vector2(4, 4)
+texture = ExtResource("6_gk7fa")
+
+[node name="Plant2o" type="Sprite2D" parent="Water/Plant"]
+texture_filter = 1
+position = Vector2(232, 344)
+scale = Vector2(4, 4)
+texture = ExtResource("6_bo5an")
+
+[node name="Plant9o" parent="Water/Plant" instance=ExtResource("7_1vy22")]
+position = Vector2(288, 432)
+
+[node name="Plant10o" parent="Water/Plant" instance=ExtResource("8_xmmsw")]
+position = Vector2(368, 424)
+
+[node name="Plant11o" parent="Water/Plant" instance=ExtResource("9_jiet0")]
+position = Vector2(776, 336)
+
+[node name="Plant15o" parent="Water/Plant" instance=ExtResource("6_xoq28")]
+position = Vector2(-32, 288)
+
+[node name="Plant13o" parent="Water/Plant" instance=ExtResource("11_ee4k6")]
+position = Vector2(-168, 320)
+
+[node name="Plant5o" parent="Water/Plant" instance=ExtResource("8_7kfhq")]
+position = Vector2(584, 424)
+
+[node name="PlantLong1o" type="Sprite2D" parent="Water/Plant"]
+texture_filter = 1
+position = Vector2(608, 264)
+scale = Vector2(4, 4)
+texture = ExtResource("11_phkp7")
+
+[node name="PlantLong4o" type="Sprite2D" parent="Water/Plant"]
+texture_filter = 1
+position = Vector2(648, 240)
+scale = Vector2(4, 4)
+texture = ExtResource("12_gn4ak")
+
+[node name="Shell" type="Node2D" parent="Water"]
+y_sort_enabled = true
+
+[node name="Shell1o" parent="Water/Shell" instance=ExtResource("13_4go6d")]
+position = Vector2(-176, 392)
+
+[node name="Sponge" type="Node2D" parent="Water"]
+y_sort_enabled = true
+
+[node name="Sponge1o" parent="Water/Sponge" instance=ExtResource("14_1ryck")]
+position = Vector2(456, 312)
 
 [node name="TopLeft" type="Marker2D" parent="."]
 visible = false
@@ -44,6 +99,6 @@ position = Vector2(896, 552)
 
 [node name="GameUI" parent="CanvasLayer" instance=ExtResource("5_t1b3e")]
 
-[connection signal="chat_edit_ended" from="CanvasLayer/GameUI" to="Player" method="_on_game_ui_chat_edit_ended"]
-[connection signal="chat_edit_started" from="CanvasLayer/GameUI" to="Player" method="_on_game_ui_chat_edit_started"]
+[connection signal="chat_edit_ended" from="CanvasLayer/GameUI" to="Water/Player" method="_on_game_ui_chat_edit_ended"]
+[connection signal="chat_edit_started" from="CanvasLayer/GameUI" to="Water/Player" method="_on_game_ui_chat_edit_started"]
 [connection signal="text_sent" from="CanvasLayer/GameUI" to="." method="_on_game_ui_text_sent"]

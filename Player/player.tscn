@@ -1,12 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://briv81to3vbt1"]
+[gd_scene load_steps=10 format=3 uid="uid://briv81to3vbt1"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_bkno0"]
-[ext_resource type="Texture2D" uid="uid://3jy08ufwkjk7" path="res://Player/peixinhos1.png" id="1_isrq8"]
+[ext_resource type="Texture2D" uid="uid://dnxfuv4pa2ii6" path="res://Player/fish_1.png" id="2_8co48"]
 [ext_resource type="Script" path="res://Player/Camera2D.gd" id="4_frhu4"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_46dkj"]
+atlas = ExtResource("2_8co48")
+region = Rect2(0, 0, 27, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnctr"]
+atlas = ExtResource("2_8co48")
+region = Rect2(27, 0, 27, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b3is"]
+atlas = ExtResource("2_8co48")
+region = Rect2(54, 0, 27, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q11sy"]
+atlas = ExtResource("2_8co48")
+region = Rect2(81, 0, 27, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j5mt2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46dkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnctr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b3is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q11sy")
+}],
+"loop": true,
+"name": &"animated",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bw3jk"]
-radius = 24.0
-height = 74.0
+radius = 14.0
+height = 68.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -14,15 +50,15 @@ collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bkno0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-102, -87)
+position = Vector2(0, -15)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("1_isrq8")
-centered = false
+sprite_frames = SubResource("SpriteFrames_j5mt2")
+animation = &"animated"
+autoplay = "animated"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bw3jk")
 
@@ -37,9 +73,9 @@ autostart = true
 [node name="CenterContainer" type="CenterContainer" parent="."]
 modulate = Color(0, 0, 0.545098, 1)
 offset_left = -32.0
-offset_top = -56.0
+offset_top = -71.0
 offset_right = 25.0
-offset_bottom = -30.0
+offset_bottom = -45.0
 
 [node name="Label" type="Label" parent="CenterContainer"]
 layout_mode = 2

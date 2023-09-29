@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq0nmhwe34ars"]
+
+[ext_resource type="Texture2D" uid="uid://c66ipclnnnwak" path="res://plants/shell_1o.png" id="1_m12j1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ducx"]
+radius = 4.0
+height = 24.0
+
+[node name="Shell1o" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_m12j1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4ducx")

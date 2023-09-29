@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://gg22futrj6b4"]
+
+[ext_resource type="Texture2D" uid="uid://c873nxy63xunp" path="res://plants/sponge_1o.png" id="1_528b0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lj44e"]
+radius = 8.0
+height = 16.0
+
+[node name="Sponge1o" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_528b0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lj44e")

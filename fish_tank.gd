@@ -6,7 +6,7 @@ extends Node2D
 var characters = {}
 
 @onready var world = $Water
-@onready var player: Node = $Player
+@onready var player: Node = $Water/Player
 @onready var game_ui := $CanvasLayer/GameUI
 
 func _ready() -> void:

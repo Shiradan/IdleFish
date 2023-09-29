@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://qswf1tcaot1n"]
+
+[ext_resource type="Texture2D" uid="uid://vliqsg1iw4eb" path="res://plants/plant_5o.png" id="1_xr44v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ny6sa"]
+radius = 4.0
+
+[node name="Plant5o" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_xr44v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ny6sa")

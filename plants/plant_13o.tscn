@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://4n6mx3vtdi7v"]
+
+[ext_resource type="Texture2D" uid="uid://bpa5wwmlxy16p" path="res://plants/plant_13o.png" id="1_jkvdk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mjs06"]
+radius = 0.75
+height = 10.0
+
+[node name="Plant13o" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15.5)
+texture = ExtResource("1_jkvdk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mjs06")
