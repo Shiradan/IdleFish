@@ -1,9 +1,9 @@
 extends Node
 
-const DEFAULT_PORT=7350
-const REMOTE_NAKAMA_SERVER_IP="www.qtwsbq.fun"
+const DEFAULT_PORT=9943
+const REMOTE_NAKAMA_SERVER_IP="nk.ccdw.fun"
 const SERVER_KEY="chaibao20230808"
-const DEFAULT_PROTOCOL="http"
+const DEFAULT_PROTOCOL="https"
 
 enum ReadPermissions {
 	NO_READ,
