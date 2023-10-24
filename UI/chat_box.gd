@@ -38,7 +38,6 @@ func send_chat_message() -> void:
 	line_edit.text = ""
 	
 
-
 func _on_send_button_pressed():
 	send_chat_message()
 

@@ -66,6 +66,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "请输入至少8位数密码"
+secret = true
 
 [node name="JoinIdle" type="Button" parent="LoginPanel"]
 layout_mode = 2

@@ -45,6 +45,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/multirun/plugin.cfg")
 
+[gui]
+
+theme/custom_font="res://assets/fonts/YouSheYuFeiTeJianKangTi-2.ttf"
+
 [input]
 
 ui_left={
